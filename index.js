@@ -10,6 +10,12 @@ dbConnection();
 // express app
 const app = express();
 
+// document read & parsing
+app.use(express.json());
+
+// server routes
+app.use('/api/login', require('./routes/auth'));
+
 // node server
 const server = require('http').createServer(app);
 module.exports.io = require('socket.io')(server);
