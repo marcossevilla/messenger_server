@@ -2,7 +2,7 @@
     path: api/login
 */
 
-const { Router, response } = require('express');
+const { Router } = require('express');
 const { check } = require('express-validator');
 
 const { validateJWT } = require('../middlewares/validate_jwt');
