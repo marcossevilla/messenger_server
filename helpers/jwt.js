@@ -27,9 +27,7 @@ const generateJWT = (uid) => {
 const checkJWT = (token = '') => {
 
     try {
-
         const { uid } = jwt.verify(token, process.env.JWT_KEY);
-        req.uid = uid;
         return [true, uid];
 
     } catch (error) {
