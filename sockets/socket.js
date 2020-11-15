@@ -14,14 +14,18 @@ io.on('connection', client => {
     // authenticated client
     updateUserOnlineStatus(uid, true);
 
+    // log user to specific chat room
+    client.join(uid);
+
     client.on('disconnect', () => {
         updateUserOnlineStatus(uid, false);
         console.log('client disconnected');
     });
 
-    // client.on('message', (payload) => {
-    //     console.log('message', payload);
-    //     io.emit('message', { admin: 'new message' });
-    // });
+    // listening to private message
+    client.on('private-message', (payload) => {
+        console.log('private-message', payload);
+        // io.emit('message', { admin: 'new message' });
+    });
 
 });
