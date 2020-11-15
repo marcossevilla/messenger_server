@@ -25,7 +25,7 @@ io.on('connection', client => {
     // listening to private message
     client.on('private-message', (payload) => {
         console.log('private-message', payload);
-        // io.emit('message', { admin: 'new message' });
+        io.to(payload.to).emit('private-message', payload);
     });
 
 });
