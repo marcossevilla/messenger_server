@@ -16,6 +16,7 @@ app.use(express.json());
 // server routes
 app.use('/api/login', require('./routes/auth'));
 app.use('/api/users', require('./routes/users'));
+app.use('/api/messages', require('./routes/messages'));
 
 // node server
 const server = require('http').createServer(app);
