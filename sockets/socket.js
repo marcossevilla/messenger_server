@@ -1,6 +1,6 @@
 const { io } = require('../index');
 const { checkJWT } = require('../helpers/jwt');
-const { updateUserOnlineStatus } = require('../controllers/socket');
+const { updateUserOnlineStatus, saveMessage } = require('../controllers/socket');
 
 // socket messages
 io.on('connection', client => {
@@ -17,15 +17,15 @@ io.on('connection', client => {
     // log user to specific chat room
     client.join(uid);
 
+    // listening to private message
+    client.on('private-message', async (payload) => {
+        await saveMessage(payload);
+        io.to(payload.to).emit('private-message', payload);
+    });
+
     client.on('disconnect', () => {
         updateUserOnlineStatus(uid, false);
         console.log('client disconnected');
-    });
-
-    // listening to private message
-    client.on('private-message', (payload) => {
-        console.log('private-message', payload);
-        io.to(payload.to).emit('private-message', payload);
     });
 
 });

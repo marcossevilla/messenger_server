@@ -12,11 +12,7 @@ const getUsers = async (req, res = response) => {
         .skip(from)
         .limit(20);
 
-    res.json({
-        ok: true,
-        from,
-        users,
-    });
+    res.json({ ok: true, from, users });
 
 }
 
